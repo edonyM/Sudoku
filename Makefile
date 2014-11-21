@@ -3,6 +3,7 @@
 CC = g++
 FLAGS_DEBUG = -g
 FLAGS_COMPILE = -c -Wall -Wextra -Werror
+key = N
 
 #directory
 SHELL = /bin/sh
@@ -71,6 +72,17 @@ make:
 	@$(MAKE) -s dir
 	@$(MAKE) -s debug
 	@echo "finish..."
+	@echo "******************************"
+	@echo "     ____  ____  _   ________"
+	@echo "    / __ \/ __ \/ | / / ____/"
+	@echo "   / / / / / / /  |/ / __/   "
+	@echo "  / /_/ / /_/ / /|  / /___   "
+	@echo " /_____/\____/_/ |_/_____/   "
+	@echo "******************************"
+	@echo "You want the executable file run itself?"
+	@echo "'Y' for yes,'N' for no"
+	@read -n1 $(key);ifeq($(key),'Y')@cd $(DIR_BIN);./$(TARGET)\n endif
+			                              
 #CXX ?= g++
 #CXX_FLAGS =-c -Wall
 
