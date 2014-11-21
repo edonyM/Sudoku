@@ -4,9 +4,9 @@
 #include "Grid.h"
 
 class SudokuGrid : public Grid {
-    bool isSectionValid(unsigned);
-    bool isRowValid(unsigned);
-    bool isColValid(unsigned);
+    bool isSectionValid(int);
+    bool isRowValid(int);
+    bool isColValid(int);
 public:
     SudokuGrid();
     bool isValid();

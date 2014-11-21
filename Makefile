@@ -1,7 +1,8 @@
+#----------------options----------------#
 #environment
 CC = g++
 FLAGS_DEBUG = -g
-FLAGS_COMPILE = -c -Wall
+FLAGS_COMPILE = -c -Wall -Wextra -Werror
 
 #directory
 SHELL = /bin/sh
@@ -9,20 +10,28 @@ DIR = $(PWD)
 DIR_OBJ = $(DIR)/obj/
 DIR_SRC = $(DIR)/src/
 DIR_BIN = $(DIR)/bin/
+
+#target
 TARGET = sudoku
+
 #vpath
 #vpath %.cpp $(DIR_SRC)
 #vpath %.o $(DIR_OBJ)
+
 #src
 SRC=$(wildcard ${DIR_SRC}*.cpp)
+
 #obj
 OBJ=$(patsubst %.cpp,${DIR_OBJ}%.o,$(notdir ${SRC}))
-#help
+
+#----------------macro---------------#
+.PHONY:dir clean make
+#debug
 debug:$(OBJ)
 	@echo "linking..."
 	@cd $(DIR_OBJ);$(CC) *.o -o $(DIR_BIN)$(TARGET)
 	@echo "linking end..."
-	@echo "execute the $(TARGET) in $(DIR_BIN)$(TARGE)"
+	@echo "execute the $(TARGET) in $(DIR_BIN)$(TARGET)"
 
 $(DIR_OBJ)%.o:$(DIR_SRC)%.cpp
 	@echo "compiling..."
@@ -30,23 +39,38 @@ $(DIR_OBJ)%.o:$(DIR_SRC)%.cpp
 	$(CC) $(FLAGS_DEBUG) $(FLAGS_COMPILE) $< -o $@
 	@echo "compiling end..."
 
+#clean
 clean:
 	@rm -rf $(DIR_OBJ)
 	@rm -rf $(DIR_BIN)
 
-#mkdir
+#objects & executable direction
 dir:
 	@mkdir -p $(DIR_OBJ)
 	@mkdir -p $(DIR_BIN)
 
+#help
 help:
-	@echo "makefile..."
-de:
+	@echo "......------------Makefile------------......"
+	@echo "Include four commands: #1.de; #2.clean; #3.dir; #4.help"
+	@echo "#1.de:"
+	@echo "    debug the source file into a executable file that is included in the $(DIR_BIN)!"
+	@echo "#2.clean:"
+	@echo "    delete the debug files and directions"
+	@echo "#3.dir:"
+	@echo "    mkdir a new directions for objects and executable file:"
+	@echo "    $(DIR_BIN) for executable file"
+	@echo "    $(DIR_OBJ) for object file"
+	@echo "#4.help:"
+	@echo "    help for using this makefile to debug a project which includes source files include files"
+	@echo "......------------End------------......"
+
+#make all the commands and get the executable file
+make:
 	@echo "start debugging..."
 	@$(MAKE) -s dir
 	@$(MAKE) -s debug
 	@echo "finish..."
-.PHONY:dir clean de
 #CXX ?= g++
 #CXX_FLAGS =-c -Wall
 

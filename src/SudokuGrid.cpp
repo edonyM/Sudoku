@@ -25,13 +25,13 @@ bool SudokuGrid::isValid()
     return true;
 }
 
-bool SudokuGrid::isRowValid(unsigned rowNumber)
+bool SudokuGrid::isRowValid(int rowNumber)
 {
     // we assume that all the cells have a value > 0
     int numbers[SUDOKU_SIZE] = {0,};
 
 
-    for(unsigned j = 0; j < m_cols; j++) {
+    for(int j = 0; j < m_cols; j++) {
         if(numbers[m_grid[rowNumber][j] - 1]) // maybe i, j can be returned
             return false; // it means we are re-visiting some location
         numbers[m_grid[rowNumber][j] - 1] += 1;
@@ -40,12 +40,12 @@ bool SudokuGrid::isRowValid(unsigned rowNumber)
 
 }
 
-bool SudokuGrid::isColValid(unsigned colNumber)
+bool SudokuGrid::isColValid(int colNumber)
 {
     // we assume that all the cells have a value > 0
     int numbers[SUDOKU_SIZE] = {0,};
 
-    for(unsigned i = 0; i < m_rows; i++) {
+    for(int i = 0; i < m_rows; i++) {
         if(numbers[m_grid[i][colNumber] - 1]) // maybe i, j can be returned
             return false; // it means we are re-visiting some location
         numbers[m_grid[i][colNumber] - 1] += 1;
@@ -53,7 +53,7 @@ bool SudokuGrid::isColValid(unsigned colNumber)
     return true;
 }
 
-bool SudokuGrid::isSectionValid(unsigned sectionNumber)
+bool SudokuGrid::isSectionValid(int sectionNumber)
 {
     // we assume that all the cells have a value > 0
     int numbers[SUDOKU_SIZE] = {0,};

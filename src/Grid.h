@@ -4,15 +4,15 @@
 class Grid{
 protected:
     int** m_grid;
-    unsigned m_rows;
-    unsigned m_cols;
+    int m_rows;
+    int m_cols;
 public:
-    Grid(unsigned rows, unsigned cols);
+    Grid(int rows, int cols);
     ~Grid();
-    unsigned rowSize() {return m_rows;};
-    unsigned colSize() {return m_cols;};
-    virtual void fillCell(unsigned value, unsigned row, unsigned col);
-    virtual unsigned getValueAt(unsigned row, unsigned col);
+    int rowSize() {return m_rows;};
+    int colSize() {return m_cols;};
+    virtual void fillCell(int value, int row, int col);
+    virtual int getValueAt(int row, int col);
     virtual void display();
     virtual bool isValid(){return true;};
 };
