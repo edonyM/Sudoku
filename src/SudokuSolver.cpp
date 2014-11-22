@@ -28,6 +28,6 @@ bool SudokuSolver::solveSection(Grid &grid, unsigned sectionNumber /*Starts from
                 init = 1;
         }
     }
-    initValue = init;
+    initValue += init;
     return true;
 }

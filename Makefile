@@ -3,7 +3,6 @@
 CC = g++
 FLAGS_DEBUG = -g
 FLAGS_COMPILE = -c -Wall -Wextra -Werror
-key = N
 
 #directory
 SHELL = /bin/sh
@@ -11,6 +10,8 @@ DIR = $(PWD)
 DIR_OBJ = $(DIR)/obj/
 DIR_SRC = $(DIR)/src/
 DIR_BIN = $(DIR)/bin/
+DIR_LIB = $(DIR)/lib/
+DIR_INC = $(DIR)/inc/
 
 #target
 TARGET = sudoku
@@ -21,6 +22,15 @@ TARGET = sudoku
 
 #src
 SRC=$(wildcard ${DIR_SRC}*.cpp)
+
+#include
+INC=-I$(DIR_INC)
+
+#lib
+#LIBS depends on your needs
+#for instance: LIBS=-lsky which means there is a libsky.a file in DIR_LIB direction
+LIBS=
+LIB=-L$(DIR_LIB)$(LIBS)
 
 #obj
 OBJ=$(patsubst %.cpp,${DIR_OBJ}%.o,$(notdir ${SRC}))
@@ -73,16 +83,25 @@ make:
 	@$(MAKE) -s debug
 	@echo "finish..."
 	@echo "******************************"
-	@echo "     ____  ____  _   ________"
-	@echo "    / __ \/ __ \/ | / / ____/"
-	@echo "   / / / / / / /  |/ / __/   "
-	@echo "  / /_/ / /_/ / /|  / /___   "
-	@echo " /_____/\____/_/ |_/_____/   "
+	@echo "*    ____  ____  _   ________*"
+	@echo "*   / __ \/ __ \/ | / / ____/*"
+	@echo "*  / / / / / / /  |/ / __/   *"
+	@echo "* / /_/ / /_/ / /|  / /___   *"
+	@echo "*/_____/\____/_/ |_/_____/   *"
 	@echo "******************************"
 	@echo "You want the executable file run itself?"
 	@echo "'Y' for yes,'N' for no"
-	@read -n1 $(key);ifeq($(key),'Y')@cd $(DIR_BIN);./$(TARGET)\n endif
-			                              
+	@read -s -n1 key;\
+		Y="Y";\
+		y="y";\
+		if [ $$key == $$Y ] || [ $$key == $$y ]; then\
+		cd $(DIR_BIN);\
+		$(DIR_BIN)$(TARGET);\
+		exit 0;\
+		else\
+		echo "Not Execute the File!";\
+		fi
+	@echo "done"
 #CXX ?= g++
 #CXX_FLAGS =-c -Wall
 
